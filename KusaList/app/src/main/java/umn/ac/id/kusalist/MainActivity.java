@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView iniRv;
     listAdapter rvAdapter;
-    LinkedList<String> daftarNama = new LinkedList<>();
+    LinkedList<NoteArray> daftarNama = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("KusaList");
 
         for(int i = 0 ; i < 10 ; i++){
-            daftarNama.add("Ini orang ke "+ (i+1));
+            daftarNama.add(new NoteArray("example"+ (i+1),"this is some text and stuff\n hellow world!!!\n number :"+(i+1)+"\n checkbox : "+((i % 2) == 0),null,(((i % 2) == 0))));
         }
 
         iniRv = findViewById(R.id.iniRv);

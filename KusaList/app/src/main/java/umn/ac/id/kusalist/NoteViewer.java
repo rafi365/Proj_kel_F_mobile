@@ -18,15 +18,15 @@ public class NoteViewer extends AppCompatActivity {
         Intent intent = getIntent();
         EditText title;
         EditText bodytext;
-        String nama = intent.getStringExtra("extras");
+        NoteArray nama = (NoteArray) intent.getExtras().getSerializable("extras");
 
         title = (EditText) findViewById(R.id.Title);
         bodytext = (EditText) findViewById(R.id.BodyText);
-        title.setText(nama);
+        title.setText(nama.getTitle());
 
         Toast.makeText(this, title.getText().toString(), Toast.LENGTH_LONG).show();
-        bodytext.setText("EXAMPLE TEXT \nTESTING MULTILINES");
-        getSupportActionBar().setTitle(nama);
+        bodytext.setText(nama.getBodyText());
+        getSupportActionBar().setTitle(nama.getTitle());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override

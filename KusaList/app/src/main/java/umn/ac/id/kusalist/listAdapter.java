@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
 public class listAdapter extends RecyclerView.Adapter<listAdapter.IniViewHolder> {
     private LayoutInflater inflater;
-    private LinkedList<String> daftarNama;
+    private LinkedList<NoteArray> daftarNama;
     private Context mContext;
 
 
-    listAdapter(Context context, LinkedList<String> list){
+    listAdapter(Context context, LinkedList<NoteArray> list){
         inflater = LayoutInflater.from(context);
         daftarNama = list;
         this.mContext = context;
@@ -35,7 +36,8 @@ public class listAdapter extends RecyclerView.Adapter<listAdapter.IniViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull IniViewHolder holder, int position) {
-        holder.tvRv.setText(daftarNama.get(position));
+        holder.tvRv.setText(daftarNama.get(position).getTitle());
+        holder.chkbox.setChecked(daftarNama.get(position).isCheckbox());
     }
 
     @Override
@@ -46,16 +48,18 @@ public class listAdapter extends RecyclerView.Adapter<listAdapter.IniViewHolder>
         TextView tvRv;
         listAdapter iniAdapter;
         Button test;
+        CheckBox chkbox;
+
         private int mPosisi;
-        private String mSumberAudio;
+        private NoteArray mSumberAudio; //PLACEHOLDER ARRAY, NOT FOR FINAL USE!
         public IniViewHolder(@NonNull View itemView, listAdapter adapter) {
             super(itemView);
             tvRv = itemView.findViewById(R.id.tvRv);
             iniAdapter = adapter;
             test = itemView.findViewById(R.id.button3);
+            chkbox = itemView.findViewById(R.id.checkBox);
             test.setOnClickListener(view -> {
-                mPosisi = getLayoutPosition();
-                String testc = daftarNama.get(mPosisi);
+                String testc = daftarNama.get(mPosisi).getTitle();
                 Toast.makeText(mContext, testc, Toast.LENGTH_LONG).show();
                 daftarNama.remove(mPosisi);//remove the item from list
                 notifyItemRemoved(mPosisi);//refresh recyclerview
