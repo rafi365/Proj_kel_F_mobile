@@ -5,22 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NoteViewer">
+    tools:context=".NoteViewer"
+    android:padding="12dp">
 
     <EditText
-        android:id="@+id/Title"
+        android:padding="12dp"
+        android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:inputType="textPersonName"
-        android:text="Title" />
+        android:hint="Judul Catatan"/>
 
     <EditText
-        android:id="@+id/BodyText"
+        android:id="@+id/et_body"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:ems="10"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:text="body"/>
+        android:padding="12dp"
+        android:hint="Catatan"/>
+
+    <Button
+        android:id="@+id/bt_save"
+        android:padding="16dp"
+        android:text="Simpan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

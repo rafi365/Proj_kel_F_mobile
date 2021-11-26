@@ -1,33 +1,42 @@
 package umn.ac.id.kusalist;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class NoteViewer extends AppCompatActivity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference notesRef = database.getReference("notes");
+    EditText etTitle;
+    EditText etBody;
+    Button saveButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_viewer);
-        Intent intent = getIntent();
-        EditText title;
-        EditText bodytext;
-        NoteArray nama = (NoteArray) intent.getExtras().getSerializable("extras");
 
-        title = (EditText) findViewById(R.id.Title);
-        bodytext = (EditText) findViewById(R.id.BodyText);
-        title.setText(nama.getTitle());
+        Bundle b = getIntent().getExtras();
+        Note note = b.getParcelable("note");
 
-        Toast.makeText(this, title.getText().toString(), Toast.LENGTH_LONG).show();
-        bodytext.setText(nama.getBodyText());
-        getSupportActionBar().setTitle(nama.getTitle());
+        etTitle = findViewById(R.id.et_title);
+        etBody = findViewById(R.id.et_body);
+        saveButton = findViewById(R.id.bt_save);
+        etTitle.setText(note.getTitle());
+
+        etBody.setText(note.getBody());
+        getSupportActionBar().setTitle(note.getTitle());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        saveButton.setOnClickListener(view -> {
+            note.setTitle(etTitle.getText().toString());
+            note.setBody(etBody.getText().toString());
+            notesRef.child(note.getId()).setValue(note);
+            finish();
+        });
     }
     @Override
     public boolean onSupportNavigateUp() {
