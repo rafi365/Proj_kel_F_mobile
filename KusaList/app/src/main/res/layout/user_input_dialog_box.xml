@@ -10,13 +10,13 @@
         android:id="@+id/dialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Catatan Baru"
+        android:text="List Baru"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/titleInputDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Masukkan judul catatan"
+        android:hint="Masukkan judul List"
         android:inputType="text"/>
 </LinearLayout>
