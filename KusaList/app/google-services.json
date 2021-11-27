@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "523884047422",
+    "project_id": "kusalist",
+    "storage_bucket": "kusalist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523884047422:android:e19bbf189f22436130756f",
+        "android_client_info": {
+          "package_name": "umn.ac.id.kusalist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523884047422-hnkv327e11jb1kceotoj4q6c53slmrj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCowSry6ahcg2W7_Mn3qkGes51Rr5eZQFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523884047422-hnkv327e11jb1kceotoj4q6c53slmrj2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
