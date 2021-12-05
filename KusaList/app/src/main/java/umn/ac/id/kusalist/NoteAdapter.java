@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.IniViewHolder>
     @Override
     public void onBindViewHolder(@NonNull IniViewHolder holder, int position) {
         holder.tvRv.setText(daftarNama.get(position).getTitle());
+        holder.checkbtn.setChecked(daftarNama.get(position).isCheckbox());
     }
 
     @Override
@@ -49,12 +51,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.IniViewHolder>
         TextView tvRv;
         ImageButton btRemove;
         NoteAdapter iniAdapter;
+        CheckBox checkbtn;
 
         public IniViewHolder(@NonNull View itemView, NoteAdapter adapter) {
             super(itemView);
             tvRv = itemView.findViewById(R.id.tv_title);
             btRemove = itemView.findViewById(R.id.bt_remove);
             iniAdapter = adapter;
+            checkbtn = itemView.findViewById(R.id.checkBox);
 
             itemView.setOnClickListener(view -> {
                 Intent intentSatu = new Intent(mContext, NoteViewer.class);
@@ -65,6 +69,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.IniViewHolder>
             btRemove.setOnClickListener(view -> {
                 notesRef.child(daftarNama.get(getAdapterPosition()).getId()).removeValue();
                 Toast.makeText(mContext,"Data berhasil dihapus",Toast.LENGTH_SHORT).show();
+            });
+            checkbtn.setOnClickListener(view -> {
+                Note temp = daftarNama.get(getAdapterPosition());
+                temp.setCheckbox(checkbtn.isChecked());
+                notesRef.child(daftarNama.get(getAdapterPosition()).getId()).setValue(temp);
             });
         }
     }
