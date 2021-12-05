@@ -12,13 +12,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.IniViewHolder> {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference notesRef = database.getReference("notes");
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
+    DatabaseReference notesRef = database.getReference("users/"+user.getUid()+"/notes");
     private LayoutInflater inflater;
     private ArrayList<Note> daftarNama;
     private Context mContext;

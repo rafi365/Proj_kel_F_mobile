@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_note_viewer.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/item_note.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/menu/mainmenu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
