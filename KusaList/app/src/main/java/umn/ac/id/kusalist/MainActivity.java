@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null){
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
         }
         else
         {
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null){
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
         }
     }
 
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.logout:
                 mAuth.signOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
