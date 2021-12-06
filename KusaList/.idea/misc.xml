@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/drawable/ic_camera.xml" value="0.14635416666666667" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/drawable/ic_remove.xml" value="0.2703125" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_image.xml" value="0.264" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_image_viewer.xml" value="0.14583333333333334" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_imageview.xml" value="0.14583333333333334" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_login.xml" value="0.14583333333333334" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_main.xml" value="0.1598731884057971" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_note_viewer.xml" value="0.1" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/item_note.xml" value="0.14583333333333334" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/itemtemplate.xml" value="0.1598731884057971" />
+        <entry key="..\:/Folderku/Kuliah/App/Clone Repo GitHub/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/user_input_dialog_box.xml" value="0.1598731884057971" />
         <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Rafi/AndroidStudioProjects/Proj_kel_F_mobile/KusaList/app/src/main/res/layout/activity_note_viewer.xml" value="0.20520833333333333" />

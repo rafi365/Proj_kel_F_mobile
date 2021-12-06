@@ -1,10 +1,13 @@
 package umn.ac.id.kusalist;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +29,7 @@ public class NoteViewer extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         Note note = b.getParcelable("note");
+        FloatingActionButton fab = findViewById(R.id.fab);
 
         etTitle = findViewById(R.id.et_title);
         etBody = findViewById(R.id.et_body);
@@ -43,6 +47,12 @@ public class NoteViewer extends AppCompatActivity {
             finish();
         });
     }
+
+    public void imgfab(View view) {
+        Intent intent = new Intent(NoteViewer.this, ImageActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
