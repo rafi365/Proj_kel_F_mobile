@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -48,6 +50,8 @@ public class ImageActivity extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 22;
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
+    public static final int READ_REQUEST_CODE = 122;
+    public static final int WRITE_REQUEST_CODE = 123;
 
 
 
@@ -120,16 +124,23 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     private void askCameraPermission() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    WRITE_REQUEST_CODE);
+        }
+        if((ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        } else {
+        }
+        else {
                 openCamera();
         }
     }
         @Override
         public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            if (requestCode == CAMERA_PERM_CODE) {
+            if (requestCode == WRITE_REQUEST_CODE) {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openCamera();
                 }
@@ -137,8 +148,14 @@ public class ImageActivity extends AppCompatActivity {
         }
 
         private void openCamera() {
-            Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(camera_intent, CAMERA_REQUEST_CODE);
+        try {
+                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(camera_intent, CAMERA_REQUEST_CODE);
+
+        }catch (Exception e){
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+                Toast.makeText(this,"Akses Kamera dan Storage belum di izin kan",Toast.LENGTH_SHORT).show();
+        }
         }
 
     // Select Image method
@@ -191,27 +208,18 @@ public class ImageActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        if(requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            //converting bitmap to uri
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
+            filePath = Uri.parse(path);
 
-        if (requestCode == CAMERA_REQUEST_CODE
-                && resultCode == RESULT_OK
-                && data != null
-                && data.getData() != null) {
-
-            filePath = data.getData();
-            try{
-                Bitmap image = MediaStore
-                        .Images
-                        .Media
-                        .getBitmap(
-                                getContentResolver(),
-                                filePath);
-                data.getExtras().get("data");
-                imageView.setImageBitmap(image);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            imageView.setImageBitmap(imageBitmap);
         }
+
     }
 
     // UploadImage method
