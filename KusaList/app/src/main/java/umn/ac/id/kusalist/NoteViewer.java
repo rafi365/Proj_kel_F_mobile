@@ -21,6 +21,7 @@ public class NoteViewer extends AppCompatActivity {
     EditText etTitle;
     EditText etBody;
     Button saveButton;
+    String noteid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class NoteViewer extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         Note note = b.getParcelable("note");
         FloatingActionButton fab = findViewById(R.id.fab);
+        noteid = note.getId();
 
         etTitle = findViewById(R.id.et_title);
         etBody = findViewById(R.id.et_body);
@@ -50,6 +52,7 @@ public class NoteViewer extends AppCompatActivity {
 
     public void imgfab(View view) {
         Intent intent = new Intent(NoteViewer.this, ImageActivity.class);
+        intent.putExtra("note",noteid);
         startActivity(intent);
     }
 

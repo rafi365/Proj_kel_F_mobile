@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,6 +21,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -49,12 +54,16 @@ public class ImageActivity extends AppCompatActivity {
     // instance for firebase storage and StorageReference
     FirebaseStorage storage;
     StorageReference storageReference;
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
+    DatabaseReference notesRef = database.getReference("users/"+user.getUid()+"/notes");
+    String noteid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
-
+        noteid = getIntent().getExtras().getString("note");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -67,6 +76,21 @@ public class ImageActivity extends AppCompatActivity {
         // get the Firebase  storage reference
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+        StorageReference photoReference= storageReference.child("images/users/"+user.getUid()+"/notes/"+noteid);
+        final long ONE_MEGABYTE = 1024 * 1024;
+        photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                imageView.setImageBitmap(bmp);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+//                Toast.makeText(getApplicationContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+            }
+        });
 
         // on pressing btnSelect SelectImage() is called
         btnCapture.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +228,7 @@ public class ImageActivity extends AppCompatActivity {
             // Defining the child of storageReference
             StorageReference ref
                     = storageReference
-                    .child( "images/" + UUID.randomUUID().toString());
+                    .child( "images/users/"+user.getUid()+"/notes/"+noteid);
 
             // adding listeners on upload
             // or failure of image
